@@ -14,7 +14,7 @@ body , #root{
   font-size: 2rem;
 }
 
-.container {
+.main-container {
   display: grid;
   grid-template-areas: "header"
   "main"
@@ -48,4 +48,33 @@ footer {
 
 a:hover {
 color:yellow;
+}
+
+/* Product List */
+
+.content{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.main {
+  flex: 3 60rem;
+}
+
+.products{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  
+}
+.product {
+  flex: 1 1 30rem;
+  height: 50rem;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.footer-product {
+  display: flex;
+  justify-content: space-between;
 }

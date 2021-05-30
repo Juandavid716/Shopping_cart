@@ -1,0 +1,28 @@
+{
+    "products":[
+        {"_id": "1",
+        "name": "samsung galaxy",
+        "price": 542.99,
+        "category": "devices",
+        "description": "amazing phone"
+
+
+        },
+        {"_id": "2",
+            "name": "dress",
+            "price": 19,
+            "category": "clothes",
+            "description": "beautiful dress"
+    
+    
+        },
+        {"_id": "3",
+            "name": "Toy story",
+            "price": 50,
+            "category": "toys",
+            "description": "Disney toy"
+    
+        }
+
+    ]
+}
