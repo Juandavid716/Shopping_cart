@@ -1,26 +1,40 @@
 {
     "products":[
         {"_id": "1",
-        "name": "samsung galaxy",
-        "price": 542.99,
-        "category": "devices",
-        "description": "amazing phone"
+        "name": "Adidas Men's Tech Response",
+        "price": 101.50,
+        "category": "Products Category",
+        "description": "amazing shoes"
 
 
         },
         {"_id": "2",
-            "name": "dress",
-            "price": 19,
-            "category": "clothes",
-            "description": "beautiful dress"
+            "name": "DeskCycle Under Desk Cycle",
+            "price": 189.00,
+            "category": "Transport Category",
+            "description": "beautiful cycle"
     
     
         },
         {"_id": "3",
-            "name": "Toy story",
-            "price": 50,
-            "category": "toys",
+            "name": "Disney Pixar Toy Story 4 Blast-Off Buzz Ligthyear Figure",
+            "price": 166.99,
+            "category": "Toys Category",
             "description": "Disney toy"
+    
+        },
+        {"_id": "4",
+            "name": "Portable Monitor - 15.6-Inch USB-C Portable Display, 1080P Full HD",
+            "price": 187.99,
+            "category": "Toys Category",
+            "description": "Disney toy"
+    
+        },
+        {"_id": "5",
+            "name": "Acer SB220Q bi 21.5 inches Full HD (1920 x 1080) IPS",
+            "price": 89.99,
+            "category": "Devices Category",
+            "description": "super computer"
     
         }
 
