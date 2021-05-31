@@ -137,6 +137,37 @@ flex-direction: column;
 justify-content: flex-start;
 }
 
+/* Order section */
+
+.orderSection{
+  width: 50%;
+  border:1px solid black;
+  padding: 3rem;
+}
+#titleForm {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.orderButton {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+}
+.orderButton > Button{
+  width: 10vh;
+
+}
+
+#backMainPage {
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 1rem;
+}
+/* Responsive queries */
+
 @media only screen and (max-width: 600px) {
   
   .cardOptionsFather, .cardHeaderFather {
@@ -145,5 +176,9 @@ justify-content: flex-start;
   .imageRemove {
     width: 50%;
     height: 50%;
+  }
+
+  .orderSection {
+    width: 90%;
   }
 }

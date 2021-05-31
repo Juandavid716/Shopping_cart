@@ -11,7 +11,7 @@ class App extends React.Component{
     super();
     this.state = {
         products: data.products,
-        carts: []
+        carts: JSON.parse(localStorage.getItem("carts"))?JSON.parse(localStorage.getItem("carts")): []
 
     }
 }
@@ -21,7 +21,7 @@ const carts = this.state.carts.slice();
 let existCart = false;
 carts.forEach(item => {
   if(item._id === product._id){
-    item.count++;
+    //item.count++;
     existCart = true;
   }
 });
@@ -29,11 +29,17 @@ if(!existCart){
   carts.push({...product,count : 1})
 }
 this.setState({carts})
+localStorage.setItem("carts", JSON.stringify(carts));
 }
 
 removeFromCart = (product)=> {
   const carts = this.state.carts.slice();
   this.setState({carts: carts.filter(item=> item._id !== product._id)})
+  localStorage.setItem("carts", JSON.stringify(carts.filter(item=> item._id !== product._id)));
+}
+
+createOrder = (order)=> {
+  alert("Need to save order "+ order.name)
 }
 render(){
   return (
@@ -50,7 +56,8 @@ render(){
          
          </div>
          <Cart  carts={this.state.carts}
-         removeFromCart={this.removeFromCart}  />
+         removeFromCart={this.removeFromCart}
+         createOrder={this.createOrder}  />
        </main>
        <footer>
          Create by Juan Bojato
