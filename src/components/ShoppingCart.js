@@ -1,12 +1,37 @@
 import React, { Component } from 'react'
 import {
     Card, CardText, CardBody,
-    CardTitle, CardSubtitle, FormGroup, Label, Input, Col
+    CardTitle, CardSubtitle, FormGroup, Label, Input, Col, Form, Button
   } from 'reactstrap';
 import parsingPrice from "./number";
 
 export default class ShoppingCart extends Component {
-    
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: "",
+            email: "",
+            address: "",
+            phoneNumber: "",
+            ID: ""
+        }
+    }
+    handleInput = (e) => {
+        this.setState({[e.target.name]: e.target.value})
+    }
+
+    createOrder = (e) => {
+        e.preventDefault();
+        const order = {
+            name: this.state.name,
+            email: this.state.email,
+            address: this.state.address,
+            phoneNumber: this.state.phoneNumber,
+            ID: this.state.ID,
+            carts: this.props.carts
+        };
+        this.props.createOrder(order);
+    }
     render() {
         const {carts} = this.props;
         return (
@@ -69,11 +94,84 @@ export default class ShoppingCart extends Component {
             </div>
             {carts.length !== 0 && 
             (
+                <div>
                 <div className="total m-4">
                 <div>
                    Total: {parsingPrice(carts.reduce((accumulator,item)=> accumulator + item.price * item.count, 0 ))}
                 </div>
-            </div>
+                </div>
+                <div className="m-4">Ready to Order?</div>
+                
+                
+                <Form onSubmit={this.createOrder}>
+                <div className="orderSection m-4"> 
+                <h2 id="titleForm">Customer Information</h2>
+                    <FormGroup row>
+                        <Label for="name" sm={2}>Full Name*</Label>
+                        <Col sm={10}>
+                        <Input 
+                        type="text" 
+                        name="name" 
+                        id="name" 
+                        placeholder="with a placeholder" required
+                        onChange={this.handleInput}/>
+                        </Col>
+                    </FormGroup>
+                    <FormGroup row>
+                        <Label for="ID" sm={2}>ID*</Label>
+                        <Col sm={10}>
+                        <Input type="text" 
+                        name="ID" 
+                        id="ID" 
+                        placeholder="with a placeholder" required 
+                        onChange={this.handleInput}/>
+                        </Col>
+                    </FormGroup>
+                    <FormGroup row>
+                        <Label for="Address" sm={2}>Address</Label>
+                        <Col sm={10}>
+                        <Input type="text" 
+                        name="Address" 
+                        id="Address" 
+                        placeholder="1234 Main St" required
+                        onChange={this.handleInput}/>
+                        </Col>
+                    </FormGroup>
+                    <FormGroup row>
+                        <Label for="exampleNumber" sm={2}>Phone Number</Label>
+                        <Col sm={10}>
+                        <Input
+                        type="number"
+                        name="number"
+                        id="exampleNumber"
+                        placeholder="number placeholder"
+                        onChange={this.handleInput}
+                        />
+                        </Col>
+                    </FormGroup>
+                    <FormGroup row>
+                        <Label for="exampleEmail" sm={2} required >Email</Label>
+                        <Col>
+                        <Input
+                        type="email"
+                        name="email"
+                        id="exampleEmail"
+                        placeholder="with a placeholder"
+                        onChange={this.handleInput}
+                        />
+                        </Col>
+                    </FormGroup>
+                    </div>
+                    <div className="orderButton"> 
+                        <Button type="submit" className="m-4 ">Place order</Button>
+                        <div id="backMainPage"><p>Back to List </p></div>   
+                    </div>
+                    </Form>
+            
+                
+                
+                
+                </div>
             )} 
            
             </div>
