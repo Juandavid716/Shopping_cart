@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import {
     Card, CardText, CardBody,
     CardTitle, CardSubtitle, FormGroup, Label, Input, Col, Form, Button
   } from 'reactstrap';
+import { removeFromCart } from '../actions/cartActions';
 import parsingPrice from "./number";
 
-export default class ShoppingCart extends Component {
+class ShoppingCart extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -28,25 +30,25 @@ export default class ShoppingCart extends Component {
             address: this.state.address,
             phoneNumber: this.state.phoneNumber,
             ID: this.state.ID,
-            carts: this.props.carts
+            cartItems: this.props.cartItems
         };
         this.props.createOrder(order);
     }
     render() {
-        const {carts} = this.props;
+        const {cartItems} = this.props;
         return (
             <div className="m-4">
                 <h1>Shopping Cart</h1>
-                {carts.length === 0?
+                {cartItems.length === 0?
                 <div className="cart cart-title">There are not selected products </div>    
                  :
-                 <div className="cart cart-title">There are {carts.length} selected products </div>
+                 <div className="cart cart-title">There are {cartItems.length} selected products </div>
                  }
             
             <div className="carts">
                 <div className="cart-components">
 
-                {carts.map(cartItem => (
+                {cartItems.map(cartItem => (
                 <div key={cartItem._id} className="m-4">
                 <Card key={cartItem._id}  >
                         
@@ -92,12 +94,12 @@ export default class ShoppingCart extends Component {
                 </div>
 
             </div>
-            {carts.length !== 0 && 
+            {cartItems.length !== 0 && 
             (
                 <div>
                 <div className="total m-4">
                 <div>
-                   Total: {parsingPrice(carts.reduce((accumulator,item)=> accumulator + item.price * item.count, 0 ))}
+                   Total: {parsingPrice(cartItems.reduce((accumulator,item)=> accumulator + item.price * item.count, 0 ))}
                 </div>
                 </div>
                 <div className="m-4">Ready to Order?</div>
@@ -179,3 +181,10 @@ export default class ShoppingCart extends Component {
         )
     }
 }
+
+export default connect(
+    (state) => ({
+        cartItems: state.cart.cartItems,
+    }),
+    { removeFromCart }
+  )(ShoppingCart);
