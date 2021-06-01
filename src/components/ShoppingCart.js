@@ -6,6 +6,7 @@ import {
   } from 'reactstrap';
 import { removeFromCart } from '../actions/cartActions';
 import parsingPrice from "./number";
+import {Link} from "react-router-dom"
 
 class ShoppingCart extends Component {
     constructor(props) {
@@ -165,8 +166,10 @@ class ShoppingCart extends Component {
                     </FormGroup>
                     </div>
                     <div className="orderButton"> 
-                        <Button type="submit" className="m-4 ">Place order</Button>
+                        <Button type="submit" className="m-4">Place order</Button>
+                        <Link id="linkToHome" to="/">
                         <div id="backMainPage"><p>Back to List </p></div>   
+                        </Link>
                     </div>
                     </Form>
             

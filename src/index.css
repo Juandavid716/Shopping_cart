@@ -30,6 +30,7 @@ header {
   background-color: #1a9ef0;
   color: white;
   align-items: center;
+  justify-content: space-between;
 }
 
 
@@ -51,6 +52,35 @@ a:hover {
 color:yellow;
 }
 
+.bussinessLogo {
+display: flex;
+
+justify-content: flex-start;
+align-items: center;
+
+}
+
+.logoCart {
+
+  margin: 2rem;
+  position: relative;
+}
+.tag {
+  border-radius: 50%;
+  height: 20px;
+  float: right;
+  position: absolute;
+  left: 25px;
+  top: 10px;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+  font-size: 12px;
+  padding: 5px;
+  background: red;
+  color: #FFFFFF;
+  font-weight: bold;
+}
 /* Product List */
 
 .content{
@@ -137,6 +167,17 @@ flex-direction: column;
 justify-content: flex-start;
 }
 
+#linkToHome {
+  color: black;
+  text-decoration: none;
+}
+
+#linkToHome:hover {
+  color: red;
+  text-decoration:none; 
+  cursor:pointer;  
+}
+
 /* Order section */
 
 .orderSection{
@@ -164,8 +205,10 @@ justify-content: flex-start;
 display: flex;
 justify-content: center;
 align-items: center;
-padding: 1rem;
+padding: 2rem;
 }
+
+
 /* Responsive queries */
 
 @media only screen and (max-width: 600px) {
