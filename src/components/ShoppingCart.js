@@ -5,8 +5,10 @@ import {
     CardTitle, CardSubtitle, FormGroup, Label, Input, Col, Form, Button
   } from 'reactstrap';
 import { removeFromCart, updateCart } from '../actions/cartActions';
+import {createOrder, clearOrder} from "../actions/orderActions";
+import { Redirect } from "react-router-dom";
 import parsingPrice from "./number";
-import {Link} from "react-router-dom"
+import {Link} from "react-router-dom";
 
 class ShoppingCart extends Component {
     constructor(props) {
@@ -15,8 +17,9 @@ class ShoppingCart extends Component {
             name: "",
             email: "",
             address: "",
-            phoneNumber: "",
-            ID: ""
+            number: "",
+            ID: "",
+            total: ""
         }
     }
     handleInput = (e) => {
@@ -35,14 +38,24 @@ class ShoppingCart extends Component {
             name: this.state.name,
             email: this.state.email,
             address: this.state.address,
-            phoneNumber: this.state.phoneNumber,
-            ID: this.state.ID,
-            cartItems: this.props.cartItems
+            number: this.state.number,
+            ID_user: this.state.ID,
+            total: this.props.cartItems.reduce((accumulator,item)=> accumulator + item.price * item.count, 0 )
         };
         this.props.createOrder(order);
+        this.setState({
+            name: "",
+            email: "",
+            address: "",
+            number: "",
+            ID: "",
+            total: ""
+        })
+        
+        
     }
     render() {
-        const {cartItems} = this.props;
+        const {cartItems, order} = this.props;
         return (
             <div className="m-4">
                 <h1 className="m-4">Shopping Cart</h1>
@@ -50,6 +63,19 @@ class ShoppingCart extends Component {
                 <div className="cart cart-title">There are not selected products </div>    
                  
                  
+                 }
+                 {
+                     order && 
+                  
+                     <Redirect
+                        to={{
+                            pathname: "/order",
+                            search: "",
+                            state: { detail: order }
+                        }}
+                        />
+                   
+                   
                  }
             
             <div className="carts">
@@ -134,34 +160,34 @@ class ShoppingCart extends Component {
                         </Col>
                     </FormGroup>
                     <FormGroup row>
-                        <Label for="Address" sm={2}>Address</Label>
+                        <Label for="address" sm={2}>Address</Label>
                         <Col sm={10}>
                         <Input type="text" 
-                        name="Address" 
-                        id="Address" 
+                        name="address" 
+                        id="address" 
                         placeholder="1234 Main St" required
                         onChange={this.handleInput}/>
                         </Col>
                     </FormGroup>
                     <FormGroup row>
-                        <Label for="exampleNumber" sm={2}>Phone Number</Label>
+                        <Label for="number" sm={2}>Phone Number</Label>
                         <Col sm={10}>
                         <Input
                         type="number"
                         name="number"
-                        id="exampleNumber"
+                        id="number"
                         placeholder="number placeholder"
                         onChange={this.handleInput}
                         />
                         </Col>
                     </FormGroup>
                     <FormGroup row>
-                        <Label for="exampleEmail" sm={2} required >Email</Label>
+                        <Label for="email" sm={2} required >Email</Label>
                         <Col>
                         <Input
                         type="email"
                         name="email"
-                        id="exampleEmail"
+                        id="email"
                         placeholder="with a placeholder"
                         onChange={this.handleInput}
                         />
@@ -190,7 +216,8 @@ class ShoppingCart extends Component {
 
 export default connect(
     (state) => ({
+        order: state.order.order,
         cartItems: state.cart.cartItems,
     }),
-    { removeFromCart, updateCart }
+    { removeFromCart, createOrder, clearOrder,updateCart }
   )(ShoppingCart);

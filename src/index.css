@@ -208,7 +208,30 @@ align-items: center;
 padding: 2rem;
 }
 
+/* Order */
 
+.order {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+#titleOrder {
+font-size: 6rem;
+}
+#textOrder {
+padding: 2rem;
+}
+
+.linkHome {
+  border: solid 2px yellow;
+  text-decoration:none;
+  background: yellow;
+  padding: 1rem;
+  color:black;
+}
 /* Responsive queries */
 
 @media only screen and (max-width: 600px) {
