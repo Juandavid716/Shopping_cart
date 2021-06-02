@@ -4,7 +4,7 @@ import {
     Card, CardText, CardBody,
     CardTitle, CardSubtitle, FormGroup, Label, Input, Col, Form, Button
   } from 'reactstrap';
-import { removeFromCart } from '../actions/cartActions';
+import { removeFromCart, updateCart } from '../actions/cartActions';
 import parsingPrice from "./number";
 import {Link} from "react-router-dom"
 
@@ -22,7 +22,13 @@ class ShoppingCart extends Component {
     handleInput = (e) => {
         this.setState({[e.target.name]: e.target.value})
     }
-
+    range(start, stop, step) {
+        var a = [start], b = start;
+        while (b < stop) {
+            a.push(b += step || 1);
+        }
+        return a;
+    }
     createOrder = (e) => {
         e.preventDefault();
         const order = {
@@ -39,11 +45,11 @@ class ShoppingCart extends Component {
         const {cartItems} = this.props;
         return (
             <div className="m-4">
-                <h1>Shopping Cart</h1>
-                {cartItems.length === 0?
+                <h1 className="m-4">Shopping Cart</h1>
+                {cartItems.length === 0 && 
                 <div className="cart cart-title">There are not selected products </div>    
-                 :
-                 <div className="cart cart-title">There are {cartItems.length} selected products </div>
+                 
+                 
                  }
             
             <div className="carts">
@@ -72,12 +78,9 @@ class ShoppingCart extends Component {
                     <FormGroup row>
                         <Label for="exampleSelect" >Qty</Label>
                         <Col sm={10}>
-                        <Input type="select" name="select" id="exampleSelect">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                        <Input onChange={this.props.updateCart(cartItem)}type="select" name="select" id="exampleSelect" value={cartItem.count}>
+                        { this.range(1, 100,1).map(value => <option key={value} value={value}>{value}</option>) }
+                            
                         </Input>
                         </Col>
                     </FormGroup>
@@ -85,7 +88,7 @@ class ShoppingCart extends Component {
                     <img alt="removeLogo" className="imageRemove"src="https://img.icons8.com/plasticine/64/000000/filled-trash.png"/>
                     </div>
                  </div>
-                <div className="price">{parsingPrice(cartItem.price)}</div>
+                <div className="price">{parsingPrice(cartItem.price * cartItem.count)}</div>
                 </div>
                 </div>
                 </CardBody>
@@ -189,5 +192,5 @@ export default connect(
     (state) => ({
         cartItems: state.cart.cartItems,
     }),
-    { removeFromCart }
+    { removeFromCart, updateCart }
   )(ShoppingCart);

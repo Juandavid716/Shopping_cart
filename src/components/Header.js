@@ -16,21 +16,21 @@ class Header extends Component  {
                 </Link>
                 <div> Fast Shopping </div>
             </div>
-            
-          
-               
-               
            
             {cartItems.length === 0?
-                <div class="logoCart">
-                <div class="tag">0</div>
+                 <Link to="/cart">
+                <div className="logoCart">
+                <div className="tag">0</div>
                 <img alt="LogoCart" src="https://img.icons8.com/carbon-copy/48/000000/buy--v2.png"/> 
-                </div>     
+                </div>  
+                </Link>
                  :
-                 <div class="logoCart">
-                 <div class="tag">{cartItems.reduce((accumulator,item)=> accumulator +  item.count, 0 )}</div>  
+                 <Link to="/cart">
+                 <div className="logoCart">
+                 <div className="tag">{cartItems.reduce((accumulator,item)=> accumulator +  item.count, 0 )}</div>  
                  <img alt="LogoCart" src="https://img.icons8.com/carbon-copy/48/000000/buy--v2.png"/>
-                 </div>         
+                 </div>  
+                 </Link>       
                  }
                  
             </header>);
