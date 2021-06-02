@@ -24,8 +24,9 @@ routes.post('/', (req, res)=>{
         if(err) return res.send(err)
         conn.query('INSERT INTO order_table set ?', [req.body], (err, rows)=>{
             if(err) return res.send(err)
-
-            res.send('order added!')
+            let id = {_id: rows.insertId}
+            let result = {...id, ...req.body}
+            res.json(result);
         })
     })
 })
@@ -36,7 +37,7 @@ routes.delete('/:id', (req, res)=>{
         conn.query('DELETE FROM order_table WHERE _id = ?', [req.params.id], (err, rows)=>{
             if(err) return res.send(err)
 
-            res.send('order deleted!')
+            res.send('order deleted');
         })
     })
 })

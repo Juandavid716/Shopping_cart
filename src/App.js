@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./components/Header";
 import Product from "./components/Product";
 import Cart from "./components/ShoppingCart";
-import data from "./data.json";
+import Order from "./components/Order";
 import store from "./store";
 import {Provider} from "react-redux";
 
@@ -27,12 +27,14 @@ render(){
             <Route exact  path="/">
             <Product  />
             </Route>
-           </div>
+          </div>
          
          </div>
             <Route exact path="/cart">
             <Cart  />
             </Route>
+
+            <Route path="/order" component={Order} />
         
        </main>
        <footer>

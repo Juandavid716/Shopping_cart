@@ -19,7 +19,7 @@ routes.post('/', (req, res)=>{
         conn.query('INSERT INTO product set ?', [req.body], (err, rows)=>{
             if(err) return res.send(err)
 
-            res.send('product added!')
+            res.send('product added');
         })
     })
 })
@@ -30,7 +30,7 @@ routes.delete('/:id', (req, res)=>{
         conn.query('DELETE FROM product WHERE _id = ?', [req.params.id], (err, rows)=>{
             if(err) return res.send(err)
 
-            res.send('product deleted!')
+            res.send('product deleted');
         })
     })
 })
